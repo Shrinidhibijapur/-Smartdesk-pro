@@ -98,5 +98,24 @@ SmartDesk Pro uses a **neon-glow + glassmorphism aesthetic**, featuring:
    ```bash
    git clone https://github.com/your-username/smartdesk-pro.git
 📸 Screenshots:
-<img width="1919" height="857" alt="image" src="https://github.com/user-attachments/assets/5522f6ed-e066-47f5-834a-f13205d55db5" />
+(./screenshots/dashboard.png)<img width="1907" height="924" alt="Screenshot 2025-11-30 172724" src="https://github.com/user-attachments/assets/d592859c-d905-44a9-b55b-f99fc5ddc655" /> 
+(./screenshots/Stopwatch.png)<img width="1919" height="830" alt="Screenshot 2025-11-30 172751" src="https://github.com/user-attachments/assets/33c22b2a-b5b7-41c7-9cd6-9d9d29406981" />
+(./screenshots/timer.png)<img width="1919" height="857" alt="Screenshot 2025-11-30 172806" src="https://github.com/user-attachments/assets/3731693d-17bb-4961-8c4a-4a495c114e66" />
+
+ ✨ Future Improvements
+
+Add calendar integration
+
+Add user profiles
+
+Add productivity analytics
+
+Add sound themes for alarms
+
+🧑‍💻 Author
+
+Shrinidhi Bijapur
+ML Enthusiast • GenAI Learner • Full Stack Developer • Aspiring Software Engineer
+
+
 
