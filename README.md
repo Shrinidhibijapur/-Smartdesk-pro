@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SmartDesk Pro
 
 **SmartDesk Pro** is a futuristic, glassmorphic web dashboard designed to boost your productivity with style. It combines essential tools like a Clock, Weather widget, Alarm system, Stopwatch, Timer, and To-Do list into a single, beautiful interface.
@@ -32,3 +33,7 @@
 ## Author
 
 **Shrinidhi S Bijapur**
+=======
+# -Smartdesk-pro
+A futuristic smart dashboard web app featuring alarms, countdown timer, stopwatch, weather widget, quotes, to-do list, and theme switching — built using HTML, CSS, JavaScript, and LocalStorage.
+>>>>>>> 5c5808717ebffa65d80daa71797c793482647525
