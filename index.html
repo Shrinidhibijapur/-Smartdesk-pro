@@ -1,54 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hyper Realistic Alarm Clock</title>
-    <link rel="stylesheet" href="styles.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Orbitron:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>SmartDesk Pro - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="theme-dark">
+    <svg width="0" height="0" style="position: absolute; display: none;">
+        <defs>
+            <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#ff9900;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#e74c3c;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
 
-<body>
-    <div class="container">
-        <div class="clock-section">
-            <div class="clock-wrapper">
-                <div class="clock-face">
-                    <div class="marker twelve">12</div>
-                    <div class="marker three">3</div>
-                    <div class="marker six">6</div>
-                    <div class="marker nine">9</div>
+    <audio id="alarm-sound" src="alarm.mp3" preload="auto" loop></audio>
 
-                    <div class="hand hour-hand" id="hour-hand"></div>
-                    <div class="hand minute-hand" id="minute-hand"></div>
-                    <div class="hand second-hand" id="second-hand"></div>
-                    <div class="center-point"></div>
-                </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span class="logo-text">SmartDesk Pro</span>
             </div>
-            <div class="digital-display" id="digital-time">00:00:00</div>
-            <div class="date-display" id="date-display">Mon, Jan 1</div>
-        </div>
+            <nav class="navigation">
+                <a href="#" class="nav-item active" data-section="dashboard"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+                <a href="#" class="nav-item" data-section="clock"><i class="fas fa-clock"></i> <span>Clock</span></a>
+                <a href="#" class="nav-item" data-section="alarms"><i class="fas fa-bell"></i> <span>Alarms</span></a>
+                <a href="#" class="nav-item" data-section="stopwatch"><i class="fas fa-stopwatch"></i> <span>Stopwatch</span></a>
+                <a href="#" class="nav-item" data-section="timer"><i class="fas fa-hourglass-half"></i> <span>Timer</span></a>
+                <a href="#" class="nav-item" data-section="todo-list"><i class="fas fa-list-check"></i> <span>To-Do List</span></a>
+                <div class="nav-spacer"></div>
+                <a href="#" class="nav-item" data-section="settings"><i class="fas fa-gear"></i> <span>Settings</span></a>
+            </nav>
+        </aside>
 
-        <div class="dashboard-section">
-            <h2><i class="fas fa-bell"></i> Alarms</h2>
+        <main class="main-content">
+            <section id="dashboard" class="content-section active">
+                <h2 class="section-title">Dashboard Overview</h2>
+                <div class="dashboard-grid">
+                    <div class="widget clock-widget large-card glass-blur">
+                        <div id="digital-clock" class="neon-glow-text">00:00:00</div>
+                        <div id="current-date">Loading Date...</div>
+                    </div>
 
-            <div class="add-alarm-form">
-                <div class="input-group">
+                    <div class="widget weather-widget small-card glass-blur" id="weather-card">
+                        <div class="weather-icon-container">
+                            <i id="weather-icon" class="fas fa-cloud"></i>
+                        </div>
+                        <div class="weather-info">
+                            <div id="weather-temp" class="neon-text">--°C</div>
+                            <div id="weather-condition">Loading...</div>
+                            <div id="weather-location">Lat: 12.97, Lon: 77.59</div>
+                        </div>
+                    </div>
+
+                    <div class="widget alarm-preview-widget small-card glass-blur">
+                        <h3><i class="fas fa-bell neon-text"></i> Next Alarm</h3>
+                        <p id="next-alarm-time">No alarms set</p>
+                        <p id="next-alarm-label"></p>
+                    </div>
+
+                    <div class="widget quote-widget medium-card glass-blur">
+                        <h3><i class="fas fa-quote-right neon-text"></i> Daily Insight</h3>
+                        <p id="motivational-quote">Loading Quote...</p>
+                    </div>
+
+                    <div class="widget todo-preview-widget medium-card glass-blur">
+                        <h3><i class="fas fa-list-check neon-text"></i> Top Tasks</h3>
+                        <ul id="mini-todo-list">
+                            <li><span class="mini-task-text">No tasks...</span></li>
+                        </ul>
+                        <button class="neon-btn small" onclick="navigate('todo-list')">View All Tasks</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="clock" class="content-section">
+                <h2 class="section-title">World Clock</h2>
+                <div class="clock-display glass-blur large-card">
+                    <div id="standalone-clock" class="neon-glow-text large-clock">00:00:00</div>
+                    <div id="standalone-date" class="large-date"></div>
+                </div>
+            </section>
+
+            <section id="alarms" class="content-section">
+                <h2 class="section-title">Alarm Management</h2>
+                <div class="alarm-controls glass-blur medium-card">
                     <input type="time" id="alarm-time-input" required>
-                    <input type="text" id="alarm-label-input" placeholder="Label (e.g., Wake Up)">
+                    <input type="text" id="alarm-label-input" placeholder="Optional Label (e.g., Meeting)">
+                    <button id="set-alarm-btn" class="neon-btn primary">Set Alarm</button>
                 </div>
-                <button id="add-alarm-btn"><i class="fas fa-plus"></i> Set Alarm</button>
-            </div>
+                <div id="alarms-list-container" class="alarm-list-container">
+                    </div>
+            </section>
 
-            <div class="alarms-list" id="alarms-list">
-                <!-- Alarms will be injected here -->
-            </div>
+            <section id="timer" class="content-section">
+                <h2 class="section-title">Countdown Timer</h2>
+                <div class="timer-container glass-blur large-card">
+                    <div class="circular-timer">
+                        <svg class="progress-ring" width="300" height="300">
+                            <circle class="progress-ring-track" cx="150" cy="150" r="140"></circle>
+                            <circle class="progress-ring-progress" id="timer-progress" cx="150" cy="150" r="140" style="stroke-dasharray: 879.6; stroke-dashoffset: 879.6; stroke: url(#timerGradient);"></circle>
+                        </svg>
+                        <div class="timer-display neon-glow-text" id="timer-display">00:00</div>
+                    </div>
+
+                    <div class="timer-controls">
+                        <div class="timer-input-group">
+                            <input type="number" id="timer-minutes" min="0" max="99" value="05" placeholder="Min">
+                            <span>:</span>
+                            <input type="number" id="timer-seconds" min="0" max="59" value="00" placeholder="Sec">
+                        </div>
+                        <div class="timer-buttons">
+                            <button id="timer-start-btn" class="neon-btn primary"><i class="fas fa-play"></i> Start</button>
+                            <button id="timer-pause-btn" class="neon-btn secondary" disabled><i class="fas fa-pause"></i> Pause</button>
+                            <button id="timer-stop-btn" class="neon-btn danger" disabled><i class="fas fa-stop"></i> Stop</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stopwatch" class="content-section">
+                <h2 class="section-title">Precision Stopwatch</h2>
+                <div class="stopwatch-container glass-blur medium-card">
+                    <div id="stopwatch-display" class="neon-glow-text large-clock">00:00:00.00</div>
+                    <div class="stopwatch-controls">
+                        <button id="sw-start-btn" class="neon-btn primary"><i class="fas fa-play"></i> Start</button>
+                        <button id="sw-pause-btn" class="neon-btn secondary" disabled><i class="fas fa-pause"></i> Pause</button>
+                        <button id="sw-reset-btn" class="neon-btn danger" disabled><i class="fas fa-rotate-right"></i> Reset</button>
+                        <button id="sw-lap-btn" class="neon-btn secondary" disabled><i class="fas fa-flag"></i> Lap</button>
+                    </div>
+                </div>
+
+                <div class="lap-history-container medium-card glass-blur">
+                    <h3>Lap History</h3>
+                    <div id="lap-list" class="lap-list scrollable">
+                        </div>
+                </div>
+            </section>
+
+            <section id="todo-list" class="content-section">
+                <h2 class="section-title">Task Manager</h2>
+                <div class="todo-input-group glass-blur medium-card">
+                    <input type="text" id="todo-input" placeholder="Add a new cosmic task...">
+                    <button id="add-todo-btn" class="neon-btn"><i class="fas fa-plus"></i> Add Task</button>
+                </div>
+                <div id="todo-list-container" class="todo-list-container scrollable">
+                    </div>
+            </section>
+
+            <section id="settings" class="content-section">
+                <h2 class="section-title">App Settings</h2>
+                <div class="settings-grid">
+                    <div class="setting-card glass-blur medium-card">
+                        <h3><i class="fas fa-palette neon-text"></i> Theme Switcher</h3>
+                        <p>Select your preferred aesthetic:</p>
+                        <div class="theme-options">
+                            <button id="theme-dark" class="theme-btn" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                            <button id="theme-light" class="theme-btn" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                            <button id="theme-neon" class="theme-btn" data-theme="neon"><i class="fas fa-bolt"></i> Neon</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="alarm-popup" class="alarm-popup">
+        <div class="popup-content glass-blur large-card">
+            <i class="fas fa-bell-slash ringing-icon"></i>
+            <h2>ALARM RINGING!</h2>
+            <p id="ringing-label">Time to perform a task!</p>
+            <button id="snooze-alarm-btn" class="neon-btn primary">Snooze (5m)</button>
+            <button id="dismiss-alarm-btn" class="neon-btn danger">Dismiss</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
-
 </html>
