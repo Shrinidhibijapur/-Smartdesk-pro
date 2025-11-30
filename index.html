@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyper Realistic Alarm Clock</title>
+    <link rel="stylesheet" href="styles.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="clock-section">
+            <div class="clock-wrapper">
+                <div class="clock-face">
+                    <div class="marker twelve">12</div>
+                    <div class="marker three">3</div>
+                    <div class="marker six">6</div>
+                    <div class="marker nine">9</div>
+
+                    <div class="hand hour-hand" id="hour-hand"></div>
+                    <div class="hand minute-hand" id="minute-hand"></div>
+                    <div class="hand second-hand" id="second-hand"></div>
+                    <div class="center-point"></div>
+                </div>
+            </div>
+            <div class="digital-display" id="digital-time">00:00:00</div>
+            <div class="date-display" id="date-display">Mon, Jan 1</div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2><i class="fas fa-bell"></i> Alarms</h2>
+
+            <div class="add-alarm-form">
+                <div class="input-group">
+                    <input type="time" id="alarm-time-input" required>
+                    <input type="text" id="alarm-label-input" placeholder="Label (e.g., Wake Up)">
+                </div>
+                <button id="add-alarm-btn"><i class="fas fa-plus"></i> Set Alarm</button>
+            </div>
+
+            <div class="alarms-list" id="alarms-list">
+                <!-- Alarms will be injected here -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
